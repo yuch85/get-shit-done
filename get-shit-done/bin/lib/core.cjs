@@ -21,13 +21,13 @@ const MODEL_PROFILES = {
   'gsd-executor':             { quality: 'opus', balanced: 'sonnet', budget: 'sonnet' },
   'gsd-phase-researcher':     { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
   'gsd-project-researcher':   { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-research-synthesizer': { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
+  'gsd-research-synthesizer': { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
   'gsd-debugger':             { quality: 'opus', balanced: 'sonnet', budget: 'sonnet' },
-  'gsd-codebase-mapper':      { quality: 'sonnet', balanced: 'haiku', budget: 'haiku' },
-  'gsd-verifier':             { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-plan-checker':         { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-integration-checker':  { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
-  'gsd-nyquist-auditor':      { quality: 'sonnet', balanced: 'sonnet', budget: 'haiku' },
+  'gsd-codebase-mapper':      { quality: 'opus', balanced: 'haiku', budget: 'haiku' },
+  'gsd-verifier':             { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
+  'gsd-plan-checker':         { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
+  'gsd-integration-checker':  { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
+  'gsd-nyquist-auditor':      { quality: 'opus', balanced: 'sonnet', budget: 'haiku' },
 };
 
 // ─── Output helpers ───────────────────────────────────────────────────────────
@@ -376,8 +376,8 @@ function resolveModelInternal(cwd, agentType) {
   // Fall back to profile lookup
   const profile = config.model_profile || 'balanced';
   const agentModels = MODEL_PROFILES[agentType];
-  if (!agentModels) return 'sonnet';
-  const resolved = agentModels[profile] || agentModels['balanced'] || 'sonnet';
+  if (!agentModels) return 'inherit';
+  const resolved = agentModels[profile] || agentModels['balanced'] || 'opus';
   return resolved === 'opus' ? 'inherit' : resolved;
 }
 
